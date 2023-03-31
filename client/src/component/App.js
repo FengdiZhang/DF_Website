@@ -1,12 +1,28 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./Header";
+import GlobalStyles from "./GlobalStyles";
+import Footer from "./Footer";
+import Home from "./Home";
+import Teachers from "./Teachers";
+import ImmigrationTeam from "./ImmigrationTeam";
+import AboutUs from "./AboutUs";
+import Login from "./Login";
+import Profile from "./Profile";
 const App = () => {
   return (
     <BrowserRouter>
+      <GlobalStyles />
       <Header />
+
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/teachers" element={<Teachers />} />
+        <Route path="/immigration" element={<ImmigrationTeam />} />
+        <Route path="/about_us" element={<AboutUs />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
