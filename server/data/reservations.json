@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Mumu Zhang",
+    "user_id": "111222333",
+    "teacher": "Faye Zhang",
+    "reservation_id": "5dcbd48c-e6fb-4ed0-b15c-1ca43c28eb41",
+    "availability": {
+      "reservation_day": "Monday",
+      "reservation_time": "6:00 PM"
+    }
+  }
+]
