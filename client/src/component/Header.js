@@ -26,7 +26,7 @@ const Header = () => {
                     <NavigationLink1 to="/teachers">Our Teachers</NavigationLink1>
                 </li>
                 <li>
-                    All Our Services
+                    <NavigationLink1 to="/">Our team</NavigationLink1>
                 </li>
                 <li>
                     <NavigationLink1 to="/">Home</NavigationLink1>
@@ -49,7 +49,7 @@ const Menu = styled.ul`
     z-index:3;
     position:absolute;
     top:80px;
-    right:20px;
+    right:60px;
     & li{
         font-family: 'Dosis', sans-serif;
         margin:25px;

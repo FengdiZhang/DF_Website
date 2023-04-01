@@ -8,6 +8,7 @@ import ImmigrationTeam from "./ImmigrationTeam";
 import AboutUs from "./AboutUs";
 import Login from "./Login";
 import Profile from "./Profile";
+import OneTeacher from "./OneTeacher";
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/teachers" element={<Teachers />} />
+        <Route path="/teachers/:teacher_id" element={<OneTeacher />} />
         <Route path="/immigration" element={<ImmigrationTeam />} />
         <Route path="/about_us" element={<AboutUs />} />
         <Route path="/login" element={<Login />} />

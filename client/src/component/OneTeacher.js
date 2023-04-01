@@ -1,14 +1,13 @@
 import styled, { keyframes } from "styled-components";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import { BiLoader } from "react-icons/bi";
-
-const Teachers = () => {
+const OneTeacher = () => {
+    const { teacher_id } = useParams();
     const [teachers, setTeachers] = useState();
-
     useEffect(() => {
-        fetch('/api/teachers')
+        fetch(`/teachers/${teacher_id}`)
             .then(response => {
                 return response.json();
             })
@@ -19,35 +18,25 @@ const Teachers = () => {
                 console.error('Error:', error);
             });
     }, []);
-
-
     return (
         <Wrapper>
             {
                 !teachers
                     ? <IconContainer><LoadingIcon><BiLoader /></LoadingIcon></IconContainer>
                     : <>
-                        {teachers.map((elem) => {
-                            return (
-                                <NavigationLink to={`/teachers/${elem.id}`} key={elem.id}>
-                                    <InnerWrapper>
-                                        <Img src={elem.imgSrc}></Img>
-                                        <Content>
-                                            <p><span>Name: </span>&nbsp; {elem.name}</p>
-                                            <p><span>Age: </span>&nbsp; {elem.age}</p>
-                                            <p><span>Language: </span>&nbsp; {elem.language}</p>
-                                            <p><span>Motto: </span>&nbsp; {elem.motto}</p>
-                                            <p><span>Education background:</span>&nbsp; {elem.education}</p>
-                                            <p><span>Location: </span>&nbsp; {elem.location}</p>
-                                            <p><span>Price: </span>&nbsp; ${elem.price} CAD/hour</p>
-                                        </Content>
-                                    </InnerWrapper>
-                                </NavigationLink>
-                            );
-                        })}
-
+                        <InnerWrapper>
+                            <Img src={teachers.imgSrc}></Img>
+                            <Content>
+                                <p><span>Name: </span>&nbsp; {teachers.name}</p>
+                                <p><span>Age: </span>&nbsp; {teachers.age}</p>
+                                <p><span>Language: </span>&nbsp; {teachers.language}</p>
+                                <p><span>Motto: </span>&nbsp; {teachers.motto}</p>
+                                <p><span>Education background:</span>&nbsp; {teachers.education}</p>
+                                <p><span>Location: </span>&nbsp; {teachers.location}</p>
+                                <p><span>Price: </span>&nbsp; ${teachers.price} CAD/hour</p>
+                            </Content>
+                        </InnerWrapper>
                     </>
-
             }
         </Wrapper>
     );
@@ -61,6 +50,7 @@ const Loading = keyframes`
      }
 `;
 const LoadingIcon = styled(BiLoader)`
+
     animation:${Loading} 1.5s linear infinite;
     font-size: 80px;
     padding:20px;
@@ -69,10 +59,7 @@ const LoadingIcon = styled(BiLoader)`
 `;
 const IconContainer = styled.div`
     padding:200px 0 0 500px;
-`;
-const NavigationLink = styled(NavLink)`
-    text-decoration:none;
-    color:black;
+    
 `;
 const Content = styled.div`
     padding:10px;
@@ -89,6 +76,7 @@ const Img = styled.img`
     margin:10px;
 `;
 const InnerWrapper = styled.div`
+  
     background-color:white;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     border-radius:10px;
@@ -102,8 +90,9 @@ const InnerWrapper = styled.div`
     }
 `;
 const Wrapper = styled.div`
-    height:100vh;
     background-color:#777777;
+   
     padding-top:80px;
+    position: relative;
 `;
-export default Teachers;
+export default OneTeacher;

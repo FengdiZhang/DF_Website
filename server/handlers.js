@@ -1,7 +1,7 @@
 "use strict";
 
 const { v4: uuidv4 } = require("uuid");
-const { MongoClient, Db } = require("mongodb");
+const { MongoClient } = require("mongodb");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 const options = {
@@ -10,18 +10,17 @@ const options = {
 };
 // 1. GET: all teachers
 const getTeachers = async (req, res) => {
-
     const client = new MongoClient(MONGO_URI, options);
     try {
         await client.connect();
-        console.log("successfully connect to server");
         const db = client.db("DF_Website");
         const teachers = await db.collection("teachers").find().toArray();
         res.status(200).json({ status: 200, data: teachers });
     } catch (err) {
         console.error(err);
+    } finally {
+        await client.close();
     }
-    client.close();
 };
 // 2. GET: a specific teacher
 const getOneTeacher = async (req, res) => {
@@ -29,7 +28,7 @@ const getOneTeacher = async (req, res) => {
     try {
         await client.connect();
         const db = client.db("DF_Website");
-        const teacher = await db.collection("teachers").findOne({ teacher_id: req.params.id });
+        const teacher = await db.collection("teachers").findOne({ id: parseInt(req.params.teacher_id) });
         if (!teacher) {
             res.status(404).json({ status: 404, message: "teacher not found" });
         } else {

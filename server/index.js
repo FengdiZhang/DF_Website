@@ -16,9 +16,9 @@ app.use(express.json());
 const port = 8000;
 
 // 1. GET: all teachers
-app.get("/teachers", getTeachers);
+app.get("/api/teachers", getTeachers);
 // 2. GET: a specific teacher
-app.get("/teacher/:teacher_id", getOneTeacher);
+app.get("/teachers/:teacher_id", getOneTeacher);
 // 3. POST: make a reservation
 app.post("/reservation", makeReservation);
 // 4. DELETE: delete a reservation 
