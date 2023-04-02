@@ -68,7 +68,8 @@ const LoadingIcon = styled(BiLoader)`
 
 `;
 const IconContainer = styled.div`
-    padding:200px 0 0 500px;
+    padding:20% 45%;
+    height:100vh;
 `;
 const NavigationLink = styled(NavLink)`
     text-decoration:none;
@@ -102,7 +103,7 @@ const InnerWrapper = styled.div`
     }
 `;
 const Wrapper = styled.div`
-    height:100vh;
+    height:100%;
     background-color:#777777;
     padding-top:80px;
 `;

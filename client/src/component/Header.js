@@ -5,8 +5,8 @@ import { FiLogIn } from "react-icons/fi";
 const Header = () => {
     return (
         <Wrapper>
-            <NavLink to="/"><Img src='/photos/photo_logo.jpg' /></NavLink>
-            <Title>DF Immigration Agency</Title>
+            <Img src='/photos/photo_logo.png' />
+            <Title>DanFeng Immigration Agency</Title>
             <NavigationLink to="/login" >
                 <Log_in>Login</Log_in>
             </NavigationLink>
@@ -20,7 +20,7 @@ const Header = () => {
                     <NavigationLink1 to="/about_us">About us</NavigationLink1>
                 </li>
                 <li>
-                    <NavigationLink1 to="/immigration">Our Immigration Team</NavigationLink1>
+                    <NavigationLink1 to="/immigration">Our Immigration services</NavigationLink1>
                 </li>
                 <li>
                     <NavigationLink1 to="/teachers">Our Teachers</NavigationLink1>
@@ -48,7 +48,7 @@ const Menu = styled.ul`
     list-style: none;
     z-index:3;
     position:absolute;
-    top:80px;
+    top:120px;
     right:60px;
     & li{
         font-family: 'Dosis', sans-serif;
@@ -68,7 +68,7 @@ const IconStyle = {
 const Log_in = styled.div`
     position:fixed;
     right:80px;
-    top:35px;
+    top:60px;
     font-family: 'Josefin Sans', sans-serif;
 `;
 const NavigationLink = styled(NavLink)`
@@ -80,19 +80,21 @@ const NavigationLink = styled(NavLink)`
 const Icon = styled.div`  
     position:fixed;
     right:20px;
+    top:45px;
 `;
 const Img = styled.img`
-    width:30%;
+    width:75px;
+    margin-right:10px;
 `;
 const Title = styled.p`
     color:white;
     font-family: 'Josefin Sans', sans-serif;
     font-size:30px;
-    margin-top:3px;
+    margin-top:30px;
 `;
 const Wrapper = styled.div`
-    background-color: #000501;
-    padding:25px;
+    background-color: #2A2A2D;
+    padding:15px;
     display:flex;
     flex-direction:row;
     position:relative;

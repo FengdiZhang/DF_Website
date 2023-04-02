@@ -58,7 +58,8 @@ const LoadingIcon = styled(BiLoader)`
 
 `;
 const IconContainer = styled.div`
-    padding:200px 0 0 500px;
+    padding:20% 45%;
+    height:100vh;
     
 `;
 const Content = styled.div`
@@ -76,7 +77,7 @@ const Img = styled.img`
     margin:10px;
 `;
 const InnerWrapper = styled.div`
-  
+    
     background-color:white;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     border-radius:10px;
@@ -84,14 +85,14 @@ const InnerWrapper = styled.div`
     margin:30px 10px 0 10px;
     display:flex;
     flex-direction:row;
-    transition: all 0.2s ease-in-out;
+    /* transition: all 0.2s ease-in-out;
     &:hover {
         transform: scale(0.95);
-    }
+    } */
 `;
 const Wrapper = styled.div`
     background-color:#777777;
-   
+    height:100vh;
     padding-top:80px;
     position: relative;
 `;

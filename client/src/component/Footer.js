@@ -69,7 +69,7 @@ const Contact = styled.div`
     }
 `;
 const Wrapper = styled.div`
-    background-color:#000501;
+    background-color:#2A2A2A;
     padding:20px;
     width: 100%;
     color:#D5D5D5;
