@@ -1,5 +1,6 @@
 "use strict";
 
+const { application } = require("express");
 const express = require("express");
 const morgan = require("morgan");
 
@@ -7,7 +8,8 @@ const {
     getTeachers,
     getOneTeacher,
     makeReservation,
-    deleteReservation
+    deleteReservation,
+    getTeams
 } = require("./handlers");
 const app = express();
 
@@ -23,7 +25,8 @@ app.get("/teachers/:teacher_id", getOneTeacher);
 app.post("/reservation", makeReservation);
 // 4. DELETE: delete a reservation 
 app.delete("/reservation/:reservation_id", deleteReservation);
-
+// 5. GET: all team members
+app.get("/teams", getTeams);
 // catch all endpoint.
 app.get("*", (req, res) => {
     res.status(404).json({

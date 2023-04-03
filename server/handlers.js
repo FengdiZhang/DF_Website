@@ -137,9 +137,24 @@ const deleteReservation = async (req, res) => {
     }
     client.close();
 };
+// 5. GET: all team members:
+const getTeams = async (req, res) => {
+    const client = new MongoClient(MONGO_URI, options);
+    try {
+        await client.connect();
+        const db = client.db("DF_Website");
+        const teams = await db.collection("teams").find().toArray();
+        res.status(200).json({ status: 200, data: teams });
+    } catch (err) {
+        console.error(err);
+    } finally {
+        await client.close();
+    }
+};
 module.exports = {
     getTeachers,
     getOneTeacher,
     makeReservation,
-    deleteReservation
+    deleteReservation,
+    getTeams
 };
