@@ -11,6 +11,7 @@ import OneTeacher from "./OneTeacher";
 import Reservations from "./Reservations";
 import { Navigate } from "react-router-dom";
 import Teams from "./Teams";
+import ViewReservations from "./ViewReservations";
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,7 +25,8 @@ const App = () => {
         <Route path="/immigration" element={<Immigration />} />
         <Route path="/about_us" element={<AboutUs />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/reservations" element={<Reservations />} />
+        <Route path="/reservations/:reservation_id" element={<Reservations />} />
+        <Route path="/view-reservations" element={<ViewReservations />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />

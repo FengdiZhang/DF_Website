@@ -43,58 +43,67 @@ const getOneTeacher = async (req, res) => {
 // 3. POST: make a reservation
 const makeReservation = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
-    const name = req.body.name;
-    const user_id = req.body.user_id;
-    const teacher = req.body.teacher;
+    const teacher_id = Number(req.body.teacher_id);
     const reservation_id = uuidv4();
-    const availability = req.body.availability;
-    const reservation_day = availability.reservation_day;
-    const reservation_time = availability.reservation_time;
-
+    const reservation_year = req.body.reservation_year;
+    const reservation_month = req.body.reservation_month;
+    const reservation_day = req.body.reservation_day;
+    const reservation_hour = req.body.reservation_hour;
+    const user_phone = req.body.phone;
+    const username = req.body.username;
     try {
         await client.connect();
         const db = client.db("DF_Website");
         // Check if the teacher is available
         const teacherDoc = await db.collection("teachers").findOne({
-            name: teacher,
+            id: teacher_id,
         });
         // If the teacher is not found, return an error message
         if (!teacherDoc) {
             return res.status(400).json({ status: 400, message: "Teacher not found" });
         }
-        // If the teacher is not available, return an error message
-        if (!teacherDoc.availability[reservation_day][reservation_time]) {
+        // Check if the teacher is available at that time
+        const reservation_date = new Date(reservation_year, reservation_month - 1, reservation_day, Number(reservation_hour.substr(0, 2)), Number(reservation_hour.substr(3)));
+        const day = reservation_date.getDay();
+        const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][day];
+        if (!teacherDoc.availability[dayName][reservation_hour]) {
             return res.status(400).json({ status: 400, message: "Teacher not available at that time" });
         }
-        // If the teacher is available, insert a new reservation into the database
-        if (teacherDoc.availability[reservation_day][reservation_time]) {
-            const insertedReservation = await db.collection("reservations").insertOne({ name, user_id, teacher, reservation_id, availability });
-            if (!insertedReservation.insertedId) {
-                // If the insertion fails, return an error message
-                return res.status(500).json({ status: 500, message: "Failed to create a new reservation." });
-            }
-            // Update the teacher's availability for the requested time slot
-            const updatedAvailability = await db.collection("teachers").updateOne({
-                name: teacher,
-            }, {
-                $set: {
-                    [`availability.${reservation_day}.${reservation_time}`]: false
-                }
-            });
-            // If the update fails, return an error response
-            if (!updatedAvailability.modifiedCount) {
-                return res.status(500).json({ status: 500, message: "Failed to update teacher's availability." });
-            }
-            const result = await db.collection("reservations").findOne({ _id: insertedReservation.insertedId });
-            res.status(200).json({ status: 200, data: result, message: "New reservation created!" });
+        // Check if there is an existing reservation for the same teacher and time
+        const existingReservation = await db.collection("reservations").findOne({
+            teacher_id: teacher_id,
+            reservation_year: reservation_year,
+            reservation_month: reservation_month,
+            reservation_day: reservation_day,
+            reservation_hour: reservation_hour,
+        });
+        if (existingReservation) {
+            return res.status(400).json({ status: 400, message: "Time already taken for this teacher!" });
         }
+        // Create reservation object
+        const reservation = {
+            username: username,
+            reservation_id: reservation_id,
+            teacher_id: teacher_id,
+            reservation_year: reservation_year,
+            reservation_month: reservation_month,
+            reservation_day: reservation_day,
+            reservation_hour: reservation_hour,
+            user_phone: user_phone,
+        };
+        // Insert reservation into database
+        const result = await db.collection("reservations").insertOne(reservation);
+        const newReservation = await db.collection("reservations").findOne({ reservation_id: reservation_id });
+        // Return the reservation object
+        return res.status(201).json({ status: 201, data: newReservation });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ status: 500, message: err.message });
+        console.log(err);
+        return res.status(500).json({ status: 500, message: "Server error" });
     } finally {
-        await client.close();
+        client.close();
     }
 };
+
 
 // 4. DELETE: delete a reservation 
 const deleteReservation = async (req, res) => {
@@ -107,36 +116,21 @@ const deleteReservation = async (req, res) => {
         if (!reservation) {
             return res.status(404).json({ status: 404, message: "reservation not found" });
         }
-        // update "teachers" collection 
-        const teacher = await db.collection("teachers").findOne({ name: reservation.teacher });
-        if (!teacher) {
-            return res.status(404).json({ status: 404, message: "teacher not found" });
-        }
-        const reservation_day = reservation.availability.reservation_day;
-        const reservation_time = reservation.availability.reservation_time;
-        const updatedAvailability = await db.collection("teachers").updateOne({
-            name: reservation.teacher,
-        }, {
-            $set: {
-                [`availability.${reservation_day}.${reservation_time}`]: true
-            }
-        });
-        if (!updatedAvailability.matchedCount) {
-            return res.status(500).json({ status: 500, message: "Failed to update teacher's availability." });
-        }
         // update "reservations" collection  
         const result = await db.collection("reservations").deleteOne({ reservation_id: req.params.reservation_id });
         if (result.deletedCount > 0) {
-            res.status(200).json({ status: 200, message: "deleted" });
+            res.status(200).json({ status: 200, message: "reservation deleted" });
         } else {
             res.status(404).json({ status: 404, message: "reservation not found" });
         }
     } catch (err) {
         console.error(err);
         res.status(500).json({ status: 500, data: req.body, message: err.message });
+    } finally {
+        client.close();
     }
-    client.close();
 };
+
 // 5. GET: all team members:
 const getTeams = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
@@ -151,10 +145,44 @@ const getTeams = async (req, res) => {
         await client.close();
     }
 };
+// 5. GET: all reservations:
+const getReservations = async (req, res) => {
+    const client = new MongoClient(MONGO_URI, options);
+    try {
+        await client.connect();
+        const db = client.db("DF_Website");
+        const reservations = await db.collection("reservations").find().toArray();
+        res.status(200).json({ status: 200, data: reservations });
+    } catch (err) {
+        console.error(err);
+    } finally {
+        await client.close();
+    }
+};
+// 6. GET: a specific reservation based on reservation_id
+const getOneReservation = async (req, res) => {
+    const client = new MongoClient(MONGO_URI, options);
+    try {
+        await client.connect();
+        const db = client.db("DF_Website");
+        const reservation = await db.collection("reservations").findOne({ reservation_id: req.params.reservation_id });
+        if (!reservation) {
+            res.status(404).json({ status: 404, message: "reservation not found" });
+        } else {
+            res.status(200).json({ status: 200, data: reservation });
+        }
+    } catch (err) {
+        console.error(err);
+    }
+
+    client.close();
+};
 module.exports = {
     getTeachers,
     getOneTeacher,
     makeReservation,
     deleteReservation,
-    getTeams
+    getTeams,
+    getReservations,
+    getOneReservation
 };

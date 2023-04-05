@@ -5,37 +5,40 @@ import styled from "styled-components";
 import Reservations from "./Reservations";
 import moment from "moment/moment";
 import { NavLink } from "react-router-dom";
+
 const Profile = () => {
     const { user, isAuthenticated } = useAuth0();
     return (
-        isAuthenticated && (
-            <Wrapper>
-                <Banner></Banner>
-                <InnerWrapper>
-                    <Title>Your Profile:</Title>
-                    <Content>
-                        <Img>{user?.picture && <img src={user.picture} alt={user?.name} />}</Img>
-                        <Info>
-                            <h2>{user?.name}</h2>
-                            {/* <ul>
-                            {Object.keys(user).map((objKey, i) => <li key={i}>{objKey}:{user[objKey]}</li>)}
-                        </ul> */}
-                            <ul>
-                                <li><span>email:</span> {user?.email}</li>
-                                <li><span>updated:</span> {moment(user?.updated_at).format('YYYY-MM-DD HH:mm')}</li>
-                            </ul>
-                            <NavigationLink to="/reservations">
-                                <Button>View your reservations</Button>
-                            </NavigationLink>
-                        </Info>
-                    </Content>
-                    <LogoutButton />
-                </InnerWrapper>
-            </Wrapper>
-        )
-
+        <Wrapper>
+            {isAuthenticated && (
+                <>
+                    <Banner></Banner>
+                    <InnerWrapper>
+                        <Title>Your Profile:</Title>
+                        <Content>
+                            <Img>{user?.picture && <img src={user.picture} alt={user?.name} />}</Img>
+                            <Info>
+                                <h2>{user?.name}</h2>
+                                {/* <ul>
+                      {Object.keys(user).map((objKey, i) => <li key={i}>{objKey}:{user[objKey]}</li>)}
+                    </ul> */}
+                                <ul>
+                                    <li><span>email:</span> {user?.email}</li>
+                                    <li><span>updated:</span> {moment(user?.updated_at).format('YYYY-MM-DD HH:mm')}</li>
+                                </ul>
+                                <NavigationLink to="/view-reservations">
+                                    <Button>View your reservations</Button>
+                                </NavigationLink>
+                            </Info>
+                        </Content>
+                        <LogoutButton />
+                    </InnerWrapper>
+                </>
+            )}
+        </Wrapper>
     );
 };
+
 const Button = styled.button`
     border:2px solid #A6A6A6;
     color:black;
@@ -97,7 +100,7 @@ const InnerWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-    
+    height:100vh;
 `;
 
 export default Profile;

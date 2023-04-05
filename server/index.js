@@ -9,7 +9,9 @@ const {
     getOneTeacher,
     makeReservation,
     deleteReservation,
-    getTeams
+    getTeams,
+    getReservations,
+    getOneReservation
 } = require("./handlers");
 const app = express();
 
@@ -22,11 +24,15 @@ app.get("/api/teachers", getTeachers);
 // 2. GET: a specific teacher
 app.get("/teachers/:teacher_id", getOneTeacher);
 // 3. POST: make a reservation
-app.post("/reservation", makeReservation);
+app.post("/post-reservation", makeReservation);
 // 4. DELETE: delete a reservation 
-app.delete("/reservation/:reservation_id", deleteReservation);
+app.delete("/delete-reservation/:reservation_id", deleteReservation);
 // 5. GET: all team members
 app.get("/teams", getTeams);
+// 6. GET: all reservations
+app.get("/reservations", getReservations);
+// 7. GET: a specific reservation based on reservation ID 
+app.get("/reservations/:reservation_id", getOneReservation);
 // catch all endpoint.
 app.get("*", (req, res) => {
     res.status(404).json({

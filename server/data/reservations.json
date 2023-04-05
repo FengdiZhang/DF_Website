@@ -1,12 +1,13 @@
 [
   {
-    "name": "Mumu Zhang",
-    "user_id": "123",
-    "teacher": "Faye Zhang",
-    "reservation_id": "5dcbd48c-e6fb-4ed0-b15c-1ca43c28eb41",
-    "availability": {
-      "reservation_day": "Monday",
-      "reservation_time": "6:00 PM"
-    }
+    "username": "FEGNDI ZHANG",
+    "reservation_id": "1111111111111111111",
+    "teacher_id": "100",
+    "reservation_year": 2023,
+    "reservation_month": 4,
+    "reservation_day": 3,
+    "reservation_hour": "18",
+    "phone": "1234567890",
+    "email": "john@example.com"
   }
 ]

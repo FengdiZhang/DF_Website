@@ -33,11 +33,15 @@ const batchImport = async (req, res) => {
 
         const reservationsData = reservations.map((reservation) => {
             return {
-                name: reservation.name,
-                user_id: reservation.user_id,
-                teacher: reservation.teacher,
+                username: reservation.username,
                 reservation_id: reservation.reservation_id,
-                availability: reservation.availability
+                teacher_id: reservation.teacher_id,
+                reservation_year: reservation.reservation_year,
+                reservation_month: reservation.reservation_month,
+                reservation_day: reservation.reservation_day,
+                reservation_hour: reservation.reservation_hour,
+                phone: reservation.phone,
+
             };
         });
         const teamsData = teams.map((team) => {
