@@ -1,7 +1,7 @@
 <!-- @format -->
-![bad1](https://img.shields.io/badge/Coder-Fengdi-yellowgreen)
+![bad1](https://img.shields.io/badge/Coder-Fengdi-green)
 ![bad2](https://img.shields.io/badge/Stack-MongoDB-brightgreen)
-![bad3](https://img.shields.io/badge/Version-V1.0.0-green)
+![bad3](https://img.shields.io/badge/Version-V1.0.0-yellow)
 
 # Danfeng Study Abroad and Immigration Company 💻
 <img src = "/client/public/photos/photo_banner.jpg"/>
