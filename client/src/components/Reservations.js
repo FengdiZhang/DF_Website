@@ -59,7 +59,7 @@ const Reservations = () => {
                             <p>Your phone number: {reservation.user_phone}</p>
                             <p>With Teacher:  {teacherName}</p>
                             <p>
-                                * You can view all your reservations in{" "}
+                                * You can view all your appointments in{" "}
                                 <a href={"/profile"}>profile</a>
                             </p>
                         </Wrapper>

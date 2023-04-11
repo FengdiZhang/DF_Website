@@ -33,7 +33,7 @@ app.get("/teams", getTeams);
 app.get("/reservations", getReservations);
 // 7. GET: a specific reservation based on reservation ID 
 app.get("/reservations/:reservation_id", getOneReservation);
-// catch all endpoint.
+// 8. catch all endpoint.
 app.get("*", (req, res) => {
     res.status(404).json({
         status: 404,
