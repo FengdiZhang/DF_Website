@@ -1,5 +1,5 @@
 <!-- @format -->
-![bad1](https://img.shields.io/badge/Coder-Fengdi-green)
+![bad1](https://img.shields.io/badge/Coder-Fengdi-blue)
 ![bad2](https://img.shields.io/badge/Stack-MongoDB-brightgreen)
 ![bad3](https://img.shields.io/badge/Version-V1.0.0-yellow)
 
