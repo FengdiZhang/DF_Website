@@ -1,7 +1,7 @@
 <!-- @format -->
 ![bad1](https://img.shields.io/badge/Coder-Fengdi-yellowgreen)
 # DF_Website 💻
-
+<img src = "/client/public/photos/photo_banner.jpg"/>
 This is an official website created for Danfeng Study Abroad and Immigration Company
 
 ## 📋Project Description:
