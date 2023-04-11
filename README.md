@@ -5,7 +5,7 @@
 
 # Danfeng Study Abroad and Immigration Company 💻
 <img src = "/client/public/photos/photo_banner.jpg"/>
-This is an official website created for Danfeng Study Abroad and Immigration Company
+This is an official website created for Danfeng Study Abroad and Immigration Company🔽
 
 ## 📋Project Description:
 The website offers detailed information about Danfeng Company, including its founders, team, services, and teacher profiles. Students can browse through the profiles of various teachers and book appointments based on their availability. 
