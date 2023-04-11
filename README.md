@@ -19,6 +19,6 @@ The website offers detailed information about Danfeng Company, including its fou
 - React Router for handling routing within the application
 - Auth0 for authentication and authorization
 - MongoDB for storing data
-## 
+
 
 
