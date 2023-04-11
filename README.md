@@ -1,5 +1,8 @@
 <!-- @format -->
 ![bad1](https://img.shields.io/badge/Coder-Fengdi-yellowgreen)
+![bad2](https://img.shields.io/badge/Stack-MongoDB-blue)
+![bad3](https://img.shields.io/badge/Version-V1.0.0-orange)
+
 # Danfeng Study Abroad and Immigration Company 💻
 <img src = "/client/public/photos/photo_banner.jpg"/>
 This is an official website created for Danfeng Study Abroad and Immigration Company
