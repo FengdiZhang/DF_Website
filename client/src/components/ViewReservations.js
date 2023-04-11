@@ -48,22 +48,28 @@ const ViewReservations = () => {
             <Banner></Banner>
 
             <Wrapper>
-                <Title>This is your reservation:</Title>
-                {reservations.some(reservation => reservation.username === user.name) ? (
+                <Title>*This is your reservation:</Title>
+                {user && reservations.some(reservation => reservation.username === user.name) ? (
                     reservations
                         .filter(reservation => reservation.username === user.name)
                         .map(reservation => (
                             <div key={reservation.reservation_id}>
-                                <p>Hi!<span>{reservation.username}</span> </p>
                                 <p>
-                                    Your reservation:
-                                    {reservation.reservation_year}/{reservation.reservation_month}/
-                                    {reservation.reservation_day}/{reservation.reservation_hour}
+                                    Hi!
+                                    <Highlight>{reservation.username}</Highlight>
                                 </p>
-                                <p>your phone number:{reservation.user_phone}</p>
-                                <p>your reservation_id:{reservation.reservation_id}</p>
-                                <p>With teacher:<GetTeacherName teacher_id={reservation.teacher_id} /></p>
-                                <IconContainer><ImBin onClick={() => handleDeleteReservation(reservation.reservation_id)} /></IconContainer>
+                                <p>
+                                    Your reservation: {reservation.reservation_year}/{reservation.reservation_month}/
+                                    {reservation.reservation_day} {reservation.reservation_hour}
+                                </p>
+                                <p>Your phone number: {reservation.user_phone}</p>
+                                <p>Your reservation id: {reservation.reservation_id}</p>
+                                <p>
+                                    With teacher: <GetTeacherName teacher_id={reservation.teacher_id} />
+                                </p>
+                                <IconContainer>
+                                    <ImBin onClick={() => handleDeleteReservation(reservation.reservation_id)} />
+                                </IconContainer>
                             </div>
                         ))
                 ) : (
@@ -73,8 +79,16 @@ const ViewReservations = () => {
         </OuterWrapper>
 
 
+
     );
 };
+const Highlight = styled.span`
+     
+        font-size:25px;
+        font-weight:bold;
+        margin-left:20px;
+    
+`;
 const IconContainer = styled.div`
     position:absolute;
     bottom:20px;
@@ -86,19 +100,17 @@ const Banner = styled.div`
 `;
 const Wrapper = styled.div`
     background-color:white;
+    height:230px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     padding:20px;
     margin:100px 100px 0 100px; 
     position:relative;
-    & span{
-        font-size:25px;
-        font-weight:bold;
-        margin-left:20px;
-    }
+   
 `;
-const Title = styled.p`
-    
-    font-size:35px;
+const Title = styled.div`
+    font-weight:bold;
+    font-size:40px;
+    font-style:italic;
 `;
 const OuterWrapper = styled.div`
     background-color:grey;

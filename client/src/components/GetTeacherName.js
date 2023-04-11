@@ -22,17 +22,13 @@ const GetTeacherName = ({ teacher_id }) => {
     return (
         teachers && (
             <Wrapper>
-                <p>{teachers.name}</p>
+                {teachers.name}
             </Wrapper>
         )
     );
 };
-const Wrapper = styled.div`
-    & p{
-        font-size:20px;
-        font-weight:bold;
-        text-decoration:underline;
-    }
+const Wrapper = styled.span`
+    
 `;
 
 export default GetTeacherName;

@@ -127,9 +127,9 @@ const Calendars = () => {
           <br />
           {teachers && reservations.length &&
             teachers
-              .filter((teacher) => teacher.id === 100)
+              .filter((teacher) => teacher.id === Number(teacher_id))
               .map((teacher) =>
-                Object.keys(teacher.availability[dayOfTheWeek]).map((time, index) => { // 添加index参数
+                Object.keys(teacher.availability[dayOfTheWeek]).map((time, index) => {
                   const isReserved = reservations.some(
                     (reservation) =>
                       reservation.teacher_id === teacher.id &&
@@ -147,7 +147,7 @@ const Calendars = () => {
                       >
                         {time}
                       </Button>
-                      {index % 12 === 11 && <br />} {/* Add a line break after every 6 buttons */}
+                      {index % 12 === 11 && <br />}
                     </React.Fragment>
                   );
                 })

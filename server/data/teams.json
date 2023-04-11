@@ -2,14 +2,14 @@
   {
     "name": "Tong",
     "imgSrc": "/photos/teams/tong.jpg",
-    "age": "30",
+    "age": "32",
     "location": "China",
     "education": "Doctorate",
     "school": "TianJin University",
     "position": "President"
   },
   {
-    "name": "chang",
+    "name": "Chang",
     "imgSrc": "/photos/teams/chang.jpg",
     "age": "30",
     "location": "China",
@@ -18,7 +18,7 @@
     "position": "Technical Director"
   },
   {
-    "name": "Oliver Xu",
+    "name": "Oliver",
     "imgSrc": "/photos/teams/Oliver.jpg",
     "age": "28",
     "location": "Canada",
@@ -31,7 +31,7 @@
     "imgSrc": "/photos/teams/Faye.jpg",
     "age": "24",
     "location": "Canada",
-    "education": "Master",
+    "education": "Bachelor",
     "school": "McGill University",
     "position": "Director of Education"
   }
