@@ -12,6 +12,13 @@ The website offers detailed information about Danfeng Company, including its fou
 - Teacher availability displayed by day of the week
 - User-friendly appointment booking system
 - Option to view and cancel reservations
-
+## 🔧Techniques used:
+- ReactJS for building the frontend user interface
+- Styled-components for styling and theming
+- Moment.js for date and time formatting
+- React Router for handling routing within the application
+- Auth0 for authentication and authorization
+- MongoDB for storing data
+## 
 
 
